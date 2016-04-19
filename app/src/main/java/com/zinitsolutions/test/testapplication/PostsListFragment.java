@@ -13,16 +13,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zinitsolutions.test.testapplication.API.ApiFactory;
+import com.zinitsolutions.test.testapplication.models.PicturesPost;
 import com.zinitsolutions.test.testapplication.models.Post;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
 
 /**
  * Created by dmitrij on 4/19/16.
  */
-public class PostsListFragment extends Fragment {
+public class PostsListFragment extends Fragment implements Callback<List<PicturesPost>> {
     private RecyclerView mRecyclerView;
     private PostsAdapter mPostsAdapter;
 
@@ -39,7 +44,6 @@ public class PostsListFragment extends Fragment {
             this.mImage = (ImageView) itemView.findViewById(R.id.posts_list_item_image);
 
             itemView.setOnClickListener(this);
-
         }
 
         @Override
@@ -102,6 +106,26 @@ public class PostsListFragment extends Fragment {
     private List<Post> getPosts() {
         List<Post> posts = new ArrayList<>();
 
+        String apiKey = getResources().getString(R.string.ukr_bash_api_key);
+
+        Call<List<PicturesPost>> postss = ApiFactory.getUBashService().getRandomPictures(apiKey);
+        postss.enqueue(this);
+
         return posts;
+    }
+
+    @Override
+    public void onResponse(Response<List<PicturesPost>> response) {
+        if (response.isSuccess()) {
+            List<PicturesPost> airports = response.body();
+            //TODO result processing
+        }
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        //TODO fil processing
+
+        //TODO process internet missing
     }
 }

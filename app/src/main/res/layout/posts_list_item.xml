@@ -8,7 +8,7 @@
         android:layout_width="@dimen/posts_lists_image_size"
         android:layout_height="@dimen/posts_lists_image_size"
         android:layout_margin="@dimen/posts_lists_margins"
-        android:src="@drawable/test_image"
+        tools:src="@drawable/test_image"
         android:id="@+id/posts_list_item_image"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -20,15 +20,6 @@
         android:layout_height="wrap_content"
         tools:text="Test holder item"
         android:layout_alignTop="@+id/posts_list_item_image"
-        android:layout_toRightOf="@+id/posts_list_item_image"
-        android:layout_toEndOf="@+id/posts_list_item_image" />
-
-    <TextView
-        android:id="@+id/posts_list_item_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="12.05.2016 23:22:45"
-        android:layout_alignBottom="@+id/posts_list_item_image"
         android:layout_toRightOf="@+id/posts_list_item_image"
         android:layout_toEndOf="@+id/posts_list_item_image" />
 

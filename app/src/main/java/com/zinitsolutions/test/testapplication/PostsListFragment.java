@@ -1,5 +1,6 @@
 package com.zinitsolutions.test.testapplication;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zinitsolutions.test.testapplication.models.Post;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +30,13 @@ public class PostsListFragment extends Fragment {
         private Post mPost;
 
         private TextView mTitle;
-        private TextView mDate;
+        private ImageView mImage;
 
         public PostHolder(View itemView) {
             super(itemView);
 
             this.mTitle = (TextView) itemView.findViewById(R.id.posts_list_item_title);
-            this.mDate = (TextView) itemView.findViewById(R.id.posts_list_item_date);
+            this.mImage = (ImageView) itemView.findViewById(R.id.posts_list_item_image);
 
             itemView.setOnClickListener(this);
 
@@ -50,7 +55,7 @@ public class PostsListFragment extends Fragment {
             this.mPost = post;
 
             this.mTitle.setText(this.mPost.getTitle());
-            this.mDate.setText(this.mPost.getDate().toString());
+            this.mImage.setImageURI(Uri.parse(this.mPost.getThumbnail()));
         }
     }
 
@@ -97,14 +102,6 @@ public class PostsListFragment extends Fragment {
     private List<Post> getPosts() {
         List<Post> posts = new ArrayList<>();
 
-        generatePosts(posts);
-
         return posts;
-    }
-
-    private void generatePosts(List<Post> posts) {
-        for (int i = 0; i < 100; i++) {
-            posts.add(new Post("Post #" + i));
-        }
     }
 }

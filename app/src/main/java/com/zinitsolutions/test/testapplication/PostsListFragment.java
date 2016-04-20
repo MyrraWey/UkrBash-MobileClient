@@ -14,6 +14,7 @@ import com.zinitsolutions.test.testapplication.API.ApiFactory;
 import com.zinitsolutions.test.testapplication.adapters.PostsAdapter;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
+import java.io.Serializable;
 import java.util.List;
 
 import retrofit.Call;
@@ -24,6 +25,8 @@ import retrofit.Response;
  * Created by dmitrij on 4/19/16.
  */
 public class PostsListFragment extends Fragment implements Callback<List<PicturesPost>> {
+    private static final String LOADED_POSTS_LIST = "loadedPosts";
+
     private RecyclerView mRecyclerView;
     private PostsAdapter mPostsAdapter;
 
@@ -52,6 +55,10 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
         this.mRecyclerView = (RecyclerView) view.findViewById(R.id.posts_list_recycler_view);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        if(savedInstanceState != null) {
+            this.mPicturesPosts = (List<PicturesPost>) savedInstanceState.getSerializable(LOADED_POSTS_LIST);
+        }
+
         //TODO replace to separate class
         this.mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             private final int mVerticalSpaceHeight = 10;
@@ -66,6 +73,12 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
         loadPosts();
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(LOADED_POSTS_LIST, (Serializable) this.mPicturesPosts);
     }
 
     private void loadPosts() {

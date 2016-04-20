@@ -69,7 +69,7 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
     }
 
     private void loadPosts() {
-        if(this.mPicturesPosts == null) {
+        if (this.mPicturesPosts == null) {
             String apiKey = getResources().getString(R.string.ukr_bash_api_key);
             Call<List<PicturesPost>> posts = ApiFactory.getUBashService().getRandomPictures(apiKey, 100);
             posts.enqueue(this);

@@ -25,12 +25,12 @@ public class PicturePostFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_picture_post,container, false);
+        View v = inflater.inflate(R.layout.fragment_picture_post, container, false);
 
-        this.mPostImage =(ImageView) v.findViewById(R.id.picture_post_image);
-        this.mPostTitle =(TextView) v.findViewById(R.id.picture_post_title);
+        this.mPostImage = (ImageView) v.findViewById(R.id.picture_post_image);
+        this.mPostTitle = (TextView) v.findViewById(R.id.picture_post_title);
 
-        this.mPicturesPost =(PicturesPost) getArguments().getSerializable(PICTURE_POST_KEY);
+        this.mPicturesPost = (PicturesPost) getArguments().getSerializable(PICTURE_POST_KEY);
 
         this.mPostImage.setImageBitmap(Utils.getBitmapByUrl(this.mPicturesPost.getImage()));
         this.mPostTitle.setText(this.mPicturesPost.getTitle());

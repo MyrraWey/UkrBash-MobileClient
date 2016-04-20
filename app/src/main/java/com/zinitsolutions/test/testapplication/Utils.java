@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
 
 /**
  * Created by dmitrij on 4/20/16.

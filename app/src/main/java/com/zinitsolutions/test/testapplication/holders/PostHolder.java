@@ -1,9 +1,6 @@
 package com.zinitsolutions.test.testapplication.holders;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.annotation.BoolRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zinitsolutions.test.testapplication.PicturePostFragment;
 import com.zinitsolutions.test.testapplication.R;
@@ -20,9 +16,6 @@ import com.zinitsolutions.test.testapplication.SingleFragmentActivity;
 import com.zinitsolutions.test.testapplication.Utils;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 
 /**
@@ -64,13 +57,12 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
-
     }
 
     public void bind(PicturesPost post) {
         this.mPicturePost = post;
 
-        if(this.mPicturePost.getViewed()) {
+        if (this.mPicturePost.getViewed()) {
             this.mParent.setBackgroundResource(R.color.post_list_item_viewed);
         } else {
             this.mParent.setBackgroundResource(R.color.post_list_item_unviewed);

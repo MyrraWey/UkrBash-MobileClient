@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by dmitrij on 4/19/16.
  */
-public class PicturesPost implements Serializable{
+public class PicturesPost implements Serializable {
     /**
      * ID картинки
      */

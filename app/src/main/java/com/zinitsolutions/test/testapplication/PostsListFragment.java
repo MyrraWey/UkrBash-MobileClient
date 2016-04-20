@@ -27,6 +27,8 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
     private RecyclerView mRecyclerView;
     private PostsAdapter mPostsAdapter;
 
+    private List<PicturesPost> mPicturesPosts;
+
     private class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
         private final int mVerticalSpaceHeight;
@@ -67,18 +69,26 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
     }
 
     private void loadPosts() {
-        String apiKey = getResources().getString(R.string.ukr_bash_api_key);
-        Call<List<PicturesPost>> posts = ApiFactory.getUBashService().getRandomPictures(apiKey, 100);
-        posts.enqueue(this);
+        if(this.mPicturesPosts == null) {
+            String apiKey = getResources().getString(R.string.ukr_bash_api_key);
+            Call<List<PicturesPost>> posts = ApiFactory.getUBashService().getRandomPictures(apiKey, 100);
+            posts.enqueue(this);
+        } else {
+            attachAdapter();
+        }
+    }
+
+    private void attachAdapter() {
+        this.mPostsAdapter = new PostsAdapter(getActivity(), this.mPicturesPosts);
+        this.mRecyclerView.setAdapter(this.mPostsAdapter);
     }
 
     @Override
     public void onResponse(Response<List<PicturesPost>> response) {
         if (response.isSuccess()) {
-            List<PicturesPost> picturesPosts = response.body();
+            this.mPicturesPosts = response.body();
 
-            this.mPostsAdapter = new PostsAdapter(getActivity(), picturesPosts);
-            this.mRecyclerView.setAdapter(this.mPostsAdapter);
+            attachAdapter();
         }
     }
 

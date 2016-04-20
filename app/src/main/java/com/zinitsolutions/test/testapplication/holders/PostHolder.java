@@ -3,6 +3,8 @@ package com.zinitsolutions.test.testapplication.holders;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -10,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zinitsolutions.test.testapplication.PicturePostFragment;
 import com.zinitsolutions.test.testapplication.R;
+import com.zinitsolutions.test.testapplication.SingleFragmentActivity;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
 import java.io.IOException;
@@ -46,11 +50,14 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(
-                this.mContext,
-                this.mTitle.getText() + " clicked!",
-                Toast.LENGTH_SHORT
-        ).show();
+        SingleFragmentActivity activity = (SingleFragmentActivity) this.mContext;
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        Fragment fragment = new PicturePostFragment();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+
     }
 
     public void bind(PicturesPost post) {

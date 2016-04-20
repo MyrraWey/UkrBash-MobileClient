@@ -68,11 +68,17 @@ public class PicturesPost implements Serializable{
     @SerializedName("title")
     private String mTitle;
 
+    private Boolean mViewed;
+
     /**
      * рейтинг
      */
     @SerializedName("rating")
     private Integer mRating;
+
+    public PicturesPost() {
+        this.mViewed = false;
+    }
 
     public Integer getId() {
         return mId;
@@ -116,5 +122,13 @@ public class PicturesPost implements Serializable{
 
     public Integer getRating() {
         return mRating;
+    }
+
+    public Boolean getViewed() {
+        return mViewed;
+    }
+
+    public void setViewed(Boolean viewed) {
+        mViewed = viewed;
     }
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#e0e0e0">
+    android:id="@+id/posts_list_item_parent"
+    android:background="@color/post_list_item_unviewed">
 
     <ImageView
         android:id="@+id/posts_list_item_image"

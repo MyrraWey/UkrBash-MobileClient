@@ -36,34 +36,36 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
         this.mRecyclerView = (RecyclerView) view.findViewById(R.id.posts_list_recycler_view);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        this.mPostsAdapter = new PostsAdapter(getActivity(), getPosts());
-        this.mRecyclerView.setAdapter(this.mPostsAdapter);
+        loadPosts();
 
         return view;
     }
 
-    private List<Post> getPosts() {
-        List<Post> posts = new ArrayList<>();
-
+    private void loadPosts() {
         String apiKey = getResources().getString(R.string.ukr_bash_api_key);
-
         Call<List<PicturesPost>> postss = ApiFactory.getUBashService().getRandomPictures(apiKey);
         postss.enqueue(this);
-
-        return posts;
     }
 
     @Override
     public void onResponse(Response<List<PicturesPost>> response) {
         if (response.isSuccess()) {
-            List<PicturesPost> airports = response.body();
-            //TODO result processing
+            List<PicturesPost> picturesPosts = response.body();
+
+            //TODO is it very bad
+            List<Post> posts = new ArrayList<>();
+            for(Post post : picturesPosts) {
+                posts.add(post);
+            }
+
+            this.mPostsAdapter = new PostsAdapter(getActivity(), posts);
+            this.mRecyclerView.setAdapter(this.mPostsAdapter);
         }
     }
 
     @Override
     public void onFailure(Throwable t) {
-        //TODO fil processing
+        //TODO fail processing
 
         //TODO process internet missing
     }

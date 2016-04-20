@@ -1,4 +1,4 @@
-package com.zinitsolutions.test.testapplication;
+package com.zinitsolutions.test.testapplication.helpers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +13,7 @@ import java.net.URL;
 public class Utils {
     /**
      * TODO fix image loading and delete changing ThreadPolicy in SingleFragmentActivity
+     *
      * @param url
      * @return
      */

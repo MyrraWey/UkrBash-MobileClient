@@ -1,10 +1,13 @@
-package com.zinitsolutions.test.testapplication;
+package com.zinitsolutions.test.testapplication.activities;
 
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+
+import com.zinitsolutions.test.testapplication.R;
+import com.zinitsolutions.test.testapplication.fragments.PostsListFragment;
 
 public class SingleFragmentActivity extends FragmentActivity {
 

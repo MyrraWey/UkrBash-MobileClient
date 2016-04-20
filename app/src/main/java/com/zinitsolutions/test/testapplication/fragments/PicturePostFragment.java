@@ -1,4 +1,4 @@
-package com.zinitsolutions.test.testapplication;
+package com.zinitsolutions.test.testapplication.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zinitsolutions.test.testapplication.R;
+import com.zinitsolutions.test.testapplication.helpers.Utils;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
 /**

@@ -1,4 +1,4 @@
-package com.zinitsolutions.test.testapplication;
+package com.zinitsolutions.test.testapplication.fragments;
 
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zinitsolutions.test.testapplication.API.ApiFactory;
+import com.zinitsolutions.test.testapplication.R;
 import com.zinitsolutions.test.testapplication.adapters.PostsAdapter;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
@@ -55,7 +56,7 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
         this.mRecyclerView = (RecyclerView) view.findViewById(R.id.posts_list_recycler_view);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             this.mPicturesPosts = (List<PicturesPost>) savedInstanceState.getSerializable(LOADED_POSTS_LIST);
         }
 

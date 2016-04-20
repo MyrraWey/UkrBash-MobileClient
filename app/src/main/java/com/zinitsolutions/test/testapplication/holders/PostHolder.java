@@ -10,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zinitsolutions.test.testapplication.PicturePostFragment;
+import com.zinitsolutions.test.testapplication.fragments.PicturePostFragment;
 import com.zinitsolutions.test.testapplication.R;
-import com.zinitsolutions.test.testapplication.SingleFragmentActivity;
-import com.zinitsolutions.test.testapplication.Utils;
+import com.zinitsolutions.test.testapplication.activities.SingleFragmentActivity;
+import com.zinitsolutions.test.testapplication.helpers.Utils;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
 import java.util.Date;

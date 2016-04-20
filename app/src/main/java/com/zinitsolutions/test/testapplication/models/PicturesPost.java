@@ -2,10 +2,12 @@ package com.zinitsolutions.test.testapplication.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by dmitrij on 4/19/16.
  */
-public class PicturesPost {
+public class PicturesPost implements Serializable{
     /**
      * ID картинки
      */

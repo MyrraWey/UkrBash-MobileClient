@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.zinitsolutions.test.testapplication.PicturePostFragment;
 import com.zinitsolutions.test.testapplication.R;
 import com.zinitsolutions.test.testapplication.SingleFragmentActivity;
+import com.zinitsolutions.test.testapplication.Utils;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
     public void onClick(View v) {
         SingleFragmentActivity activity = (SingleFragmentActivity) this.mContext;
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        Fragment fragment = new PicturePostFragment();
+        Fragment fragment = PicturePostFragment.loadFromPicturePost(this.mPicturePost);
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
@@ -64,36 +65,9 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
         this.mPicturePost = post;
 
         this.mTitle.setText(this.mPicturePost.getTitle());
-        this.mImage.setImageBitmap(loadBitmap(this.mPicturePost.getThumbnail()));
-        this.mAuthor.setText(
-                mContext.getResources().getText(R.string.post_list_item_author_prefix)
-                        + this.mPicturePost.getAuthor()
-        );
+        this.mImage.setImageBitmap(Utils.getBitmapByUrl(this.mPicturePost.getThumbnail()));
+        this.mAuthor.setText(mContext.getResources().getText(R.string.post_list_item_author_prefix) + this.mPicturePost.getAuthor());
         this.mDate.setText(getDate());
-    }
-
-    /**
-     * TODO fix image loading and delete changing ThreadPolicy in SingleFragmentActivity
-     *
-     * @param url
-     * @return
-     */
-    private Bitmap loadBitmap(String url) {
-        URL address = null;
-        try {
-            address = new URL(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        Bitmap image = null;
-        try {
-            image = BitmapFactory.decodeStream(address.openConnection().getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return image;
     }
 
     private String getDate() {

@@ -1,5 +1,6 @@
 package com.zinitsolutions.test.testapplication;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,7 @@ import android.view.ViewGroup;
 import com.zinitsolutions.test.testapplication.API.ApiFactory;
 import com.zinitsolutions.test.testapplication.adapters.PostsAdapter;
 import com.zinitsolutions.test.testapplication.models.PicturesPost;
-import com.zinitsolutions.test.testapplication.models.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Call;
@@ -28,6 +27,21 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
     private RecyclerView mRecyclerView;
     private PostsAdapter mPostsAdapter;
 
+    private class VerticalSpaceItemDecoration extends RecyclerView.ItemDecoration {
+
+        private final int mVerticalSpaceHeight;
+
+        public VerticalSpaceItemDecoration(int mVerticalSpaceHeight) {
+            this.mVerticalSpaceHeight = mVerticalSpaceHeight;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
+                                   RecyclerView.State state) {
+            outRect.bottom = mVerticalSpaceHeight;
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,6 +50,17 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
         this.mRecyclerView = (RecyclerView) view.findViewById(R.id.posts_list_recycler_view);
         this.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //TODO replace to separate class
+        this.mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            private final int mVerticalSpaceHeight = 10;
+
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
+                                       RecyclerView.State state) {
+                outRect.bottom = mVerticalSpaceHeight;
+            }
+        });
+
         loadPosts();
 
         return view;
@@ -43,8 +68,8 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
 
     private void loadPosts() {
         String apiKey = getResources().getString(R.string.ukr_bash_api_key);
-        Call<List<PicturesPost>> postss = ApiFactory.getUBashService().getRandomPictures(apiKey);
-        postss.enqueue(this);
+        Call<List<PicturesPost>> posts = ApiFactory.getUBashService().getRandomPictures(apiKey, 100);
+        posts.enqueue(this);
     }
 
     @Override
@@ -52,13 +77,7 @@ public class PostsListFragment extends Fragment implements Callback<List<Picture
         if (response.isSuccess()) {
             List<PicturesPost> picturesPosts = response.body();
 
-            //TODO is it very bad
-            List<Post> posts = new ArrayList<>();
-            for(Post post : picturesPosts) {
-                posts.add(post);
-            }
-
-            this.mPostsAdapter = new PostsAdapter(getActivity(), posts);
+            this.mPostsAdapter = new PostsAdapter(getActivity(), picturesPosts);
             this.mRecyclerView.setAdapter(this.mPostsAdapter);
         }
     }

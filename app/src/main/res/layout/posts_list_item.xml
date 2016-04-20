@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#e0e0e0">
 
     <ImageView
         android:id="@+id/posts_list_item_image"
@@ -19,9 +20,29 @@
         android:id="@+id/posts_list_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/posts_lists_margins"
         android:layout_alignTop="@+id/posts_list_item_image"
         android:layout_toEndOf="@+id/posts_list_item_image"
         android:layout_toRightOf="@+id/posts_list_item_image"
         tools:text="Test holder item"/>
+
+    <TextView
+        android:id="@+id/posts_list_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/posts_lists_margins"
+        tools:text="21.12.2016 12:55"
+        android:layout_alignBottom="@+id/posts_list_item_image"
+        android:layout_toEndOf="@+id/posts_list_item_image"
+        android:layout_toRightOf="@+id/posts_list_item_image" />
+
+    <TextView
+        android:id="@+id/posts_list_item_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="by Post Author"
+        android:layout_alignTop="@+id/posts_list_item_date"
+        android:layout_toRightOf="@+id/posts_list_item_date"
+        android:layout_toEndOf="@+id/posts_list_item_date" />
 
 </RelativeLayout>

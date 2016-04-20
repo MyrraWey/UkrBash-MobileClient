@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.zinitsolutions.test.testapplication.R;
 import com.zinitsolutions.test.testapplication.holders.PostHolder;
-import com.zinitsolutions.test.testapplication.models.Post;
+import com.zinitsolutions.test.testapplication.models.PicturesPost;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import java.util.List;
 public class PostsAdapter extends RecyclerView.Adapter<PostHolder> {
     private Context mContext;
 
-    private List<Post> mPostsList;
+    private List<PicturesPost> mPostsList;
 
-    public PostsAdapter(Context context, List<Post> postsList) {
+    public PostsAdapter(Context context, List<PicturesPost> postsList) {
         this.mContext = context;
         this.mPostsList = postsList;
     }

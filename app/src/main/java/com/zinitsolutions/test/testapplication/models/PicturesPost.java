@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by dmitrij on 4/19/16.
  */
-public class PicturesPost implements Post {
+public class PicturesPost {
     /**
      * ID картинки
      */
@@ -72,13 +72,47 @@ public class PicturesPost implements Post {
     @SerializedName("rating")
     private Integer mRating;
 
-    @Override
-    public String getTitle() {
-        return this.mTitle;
+    public Integer getId() {
+        return mId;
     }
 
-    @Override
+    public Integer getStatus() {
+        return mStatus;
+    }
+
+    public String getType() {
+        return mType;
+    }
+
+    public String getAddDate() {
+        return mAddDate;
+    }
+
+    public String getPubDate() {
+        return mPubDate;
+    }
+
+    public String getAuthor() {
+        return mAuthor;
+    }
+
+    public Integer getAuthorId() {
+        return mAuthorId;
+    }
+
+    public String getImage() {
+        return mImage;
+    }
+
     public String getThumbnail() {
-        return this.mThumbnail;
+        return mThumbnail;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public Integer getRating() {
+        return mRating;
     }
 }

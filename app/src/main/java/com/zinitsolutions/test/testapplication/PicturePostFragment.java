@@ -19,6 +19,7 @@ public class PicturePostFragment extends Fragment {
 
     private PicturesPost mPicturesPost;
 
+    private TextView mPostId;
     private ImageView mPostImage;
     private TextView mPostTitle;
 
@@ -27,11 +28,13 @@ public class PicturePostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_picture_post, container, false);
 
+        this.mPostId = (TextView) v.findViewById(R.id.picture_post_id);
         this.mPostImage = (ImageView) v.findViewById(R.id.picture_post_image);
         this.mPostTitle = (TextView) v.findViewById(R.id.picture_post_title);
 
         this.mPicturesPost = (PicturesPost) getArguments().getSerializable(PICTURE_POST_KEY);
 
+        this.mPostId.setText(getResources().getString(R.string.picture_post_id_prefix) + this.mPostImage.getId());
         this.mPostImage.setImageBitmap(Utils.getBitmapByUrl(this.mPicturesPost.getImage()));
         this.mPostTitle.setText(this.mPicturesPost.getTitle());
 

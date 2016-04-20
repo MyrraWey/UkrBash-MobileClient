@@ -77,7 +77,7 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
         // add milliseconds to timestamp
         Long timestamp = Long.parseLong(this.mPicturePost.getPubDate()) * 1000;
         Date date = new Date(timestamp);
-        String result = DateFormat.format("EEEE, LLL d, yyyy hh:mm", date).toString();
+        String result = DateFormat.format("dd.MM.yyyy hh:mm", date).toString();
 
         return result;
     }

@@ -68,7 +68,7 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
             this.mParent.setBackgroundResource(R.color.post_list_item_unviewed);
         }
         this.mTitle.setText(this.mPicturePost.getTitle());
-        this.mImage.setImageBitmap(Utils.getBitmapByUrl(this.mPicturePost.getThumbnail()));
+        Utils.loadBitmapByUrl(this.mContext, this.mPicturePost.getThumbnail(), this.mImage);
         this.mAuthor.setText(mContext.getResources().getText(R.string.post_list_item_author_prefix) + this.mPicturePost.getAuthor());
         this.mDate.setText(getDate());
     }

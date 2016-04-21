@@ -37,7 +37,7 @@ public class PicturePostFragment extends Fragment {
         this.mPicturesPost = (PicturesPost) getArguments().getSerializable(PICTURE_POST_KEY);
 
         this.mPostId.setText(getResources().getString(R.string.picture_post_id_prefix) + this.mPostImage.getId());
-        this.mPostImage.setImageBitmap(Utils.getBitmapByUrl(this.mPicturesPost.getImage()));
+        Utils.loadBitmapByUrl(getActivity(), this.mPicturesPost.getThumbnail(), this.mPostImage);
         this.mPostTitle.setText(this.mPicturesPost.getTitle());
 
         return v;

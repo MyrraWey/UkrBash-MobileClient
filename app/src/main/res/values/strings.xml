@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">TestApplication</string>
 
-    <string name="ukr_bash_api_key">802e2ef04fe3b3e4</string>
-    <string name="ukr_bash_api_url">https://api.ukrbash.org/1/</string>
-
     <string name="post_list_item_author_prefix">"by "</string>
 
     <string name="picture_post_id_prefix">"Post #"</string>

@@ -1,6 +1,6 @@
 package com.zinitsolutions.test.testapplication.API;
 
-import com.zinitsolutions.test.testapplication.models.PicturesPost;
+import com.zinitsolutions.test.testapplication.posts.PicturesPost;
 
 import java.util.List;
 
@@ -12,9 +12,11 @@ import retrofit.http.Query;
  * Created by MyrraWey on 19.04.2016.
  */
 public interface UBashService {
-    @GET("pictures.getRandom.json")
-    Call<List<PicturesPost>> getRandomPictures(@Query("client") String apiKey);
+
+    @GET("pictures.getPublished.json")
+    Call<List<PicturesPost>> getPublishedPictures(@Query("limit") Integer postsLimit);
 
     @GET("pictures.getRandom.json")
-    Call<List<PicturesPost>> getRandomPictures(@Query("client") String apiKey, @Query("limit") Integer postsLimit);
+    Call<List<PicturesPost>> getRandomPictures(@Query("limit") Integer postsLimit);
+
 }

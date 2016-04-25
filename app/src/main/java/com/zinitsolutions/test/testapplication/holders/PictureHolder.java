@@ -14,14 +14,16 @@ import com.zinitsolutions.test.testapplication.fragments.PicturePostFragment;
 import com.zinitsolutions.test.testapplication.R;
 import com.zinitsolutions.test.testapplication.activities.SingleFragmentActivity;
 import com.zinitsolutions.test.testapplication.helpers.Utils;
-import com.zinitsolutions.test.testapplication.models.PicturesPost;
+import com.zinitsolutions.test.testapplication.posts.IPost;
+import com.zinitsolutions.test.testapplication.posts.PicturesPost;
 
 import java.util.Date;
 
 /**
  * Created by dmitrij on 4/20/16.
  */
-public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class PictureHolder extends RecyclerView.ViewHolder implements IPostHolder, View.OnClickListener {
+
     private Context mContext;
 
     private PicturesPost mPicturePost;
@@ -32,7 +34,7 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
     private TextView mAuthor;
     private TextView mDate;
 
-    public PostHolder(View itemView, Context context) {
+    public PictureHolder(View itemView, Context context) {
         super(itemView);
 
         this.mContext = context;
@@ -59,8 +61,9 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
                 .commit();
     }
 
-    public void bind(PicturesPost post) {
-        this.mPicturePost = post;
+    @Override
+    public void bind(IPost post) {
+        this.mPicturePost = (PicturesPost) post;
 
         if (this.mPicturePost.getViewed()) {
             this.mParent.setBackgroundResource(R.color.post_list_item_viewed);
@@ -81,4 +84,5 @@ public class PostHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
         return result;
     }
+
 }

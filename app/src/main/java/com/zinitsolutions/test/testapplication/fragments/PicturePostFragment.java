@@ -11,12 +11,13 @@ import android.widget.TextView;
 
 import com.zinitsolutions.test.testapplication.R;
 import com.zinitsolutions.test.testapplication.helpers.Utils;
-import com.zinitsolutions.test.testapplication.models.PicturesPost;
+import com.zinitsolutions.test.testapplication.posts.PicturesPost;
 
 /**
  * Created by dmitrij on 4/20/16.
  */
 public class PicturePostFragment extends Fragment {
+
     private static final String PICTURE_POST_KEY = "picturePost";
 
     private PicturesPost mPicturesPost;
@@ -51,4 +52,5 @@ public class PicturePostFragment extends Fragment {
 
         return fragment;
     }
+
 }

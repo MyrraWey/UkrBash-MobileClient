@@ -1,4 +1,4 @@
-package com.zinitsolutions.test.testapplication.models;
+package com.zinitsolutions.test.testapplication.posts;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +7,8 @@ import java.io.Serializable;
 /**
  * Created by dmitrij on 4/19/16.
  */
-public class PicturesPost implements Serializable {
+public class PicturesPost implements IPost, Serializable {
+
     /**
      * ID картинки
      */
@@ -131,4 +132,10 @@ public class PicturesPost implements Serializable {
     public void setViewed(Boolean viewed) {
         mViewed = viewed;
     }
+
+    @Override
+    public int getPostType() {
+        return PostType.PICTURE_POST;
+    }
+
 }

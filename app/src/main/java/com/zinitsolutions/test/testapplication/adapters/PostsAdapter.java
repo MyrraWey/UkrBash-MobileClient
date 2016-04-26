@@ -1,5 +1,6 @@
 package com.zinitsolutions.test.testapplication.adapters;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import com.zinitsolutions.test.testapplication.R;
 import com.zinitsolutions.test.testapplication.holders.IPostHolder;
 import com.zinitsolutions.test.testapplication.holders.LoadingHolder;
 import com.zinitsolutions.test.testapplication.holders.PictureHolder;
+import com.zinitsolutions.test.testapplication.listeners.OnLoadMoreListener;
 import com.zinitsolutions.test.testapplication.posts.IPost;
+import com.zinitsolutions.test.testapplication.posts.LoadingPost;
 import com.zinitsolutions.test.testapplication.posts.PostType;
 
 import java.util.List;
@@ -21,8 +24,31 @@ public class PostsAdapter extends RecyclerView.Adapter {
 
     private List<IPost> mPostsList;
 
-    public PostsAdapter(List<IPost> postsList) {
+    private OnLoadMoreListener mOnLoadMoreListener;
+    private int mVisibleThreshold = 5;
+    private boolean mLoadMore = false;
+
+    public PostsAdapter(List<IPost> postsList, RecyclerView recyclerView) {
         this.mPostsList = postsList;
+
+        final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int itemsCount = getItemCount();
+                int lastVisible = linearLayoutManager.findLastVisibleItemPosition();
+
+                if (mOnLoadMoreListener != null) {
+                    if (!mLoadMore && itemsCount <= (lastVisible + mVisibleThreshold)) {
+                        mLoadMore = true;
+                        addLoadingPost();
+                        mOnLoadMoreListener.onLoadMore();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -63,6 +89,33 @@ public class PostsAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         return this.mPostsList.get(position).getPostType();
+    }
+
+    public void addItems(List<IPost> posts) {
+        if (this.mLoadMore) {
+            this.mLoadMore = false;
+            deleteLoadingPost();
+        }
+
+        int itemsCount = this.mPostsList.size();
+        int length = posts.size();
+
+        this.mPostsList.addAll(posts);
+        this.notifyItemRangeInserted(itemsCount, length);
+    }
+
+    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
+        this.mOnLoadMoreListener = onLoadMoreListener;
+    }
+
+    private void addLoadingPost() {
+        this.mPostsList.add(new LoadingPost());
+        notifyItemInserted(this.mPostsList.size() - 1);
+    }
+
+    private void deleteLoadingPost() {
+        this.mPostsList.remove(this.mPostsList.size() - 1);
+        notifyItemRemoved(this.mPostsList.size());
     }
 
 }

@@ -14,9 +14,9 @@ import retrofit.http.Query;
 public interface UBashService {
 
     @GET("pictures.getPublished.json")
-    Call<List<PicturesPost>> getPublishedPictures(@Query("limit") Integer postsLimit);
+    Call<List<PicturesPost>> getPublishedPictures(@Query("limit") Integer count);
 
-    @GET("pictures.getRandom.json")
-    Call<List<PicturesPost>> getRandomPictures(@Query("limit") Integer postsLimit);
+    @GET("pictures.getPublished.json")
+    Call<List<PicturesPost>> getPublishedPictures(@Query("limit") Integer count, @Query("start") Integer offset);
 
 }
